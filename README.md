@@ -30,13 +30,138 @@ Step 7: Save and run the application.
 ```
 /*
 Program to print the contact name and phone number using content providers.
-Developed by:
-Registeration Number :
+Developed by: SYED JAVEED H
+Registeration Number : 212221220055
 */
+```
+## ACTIVITY_MAIN.XML
+```
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"/>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_below="@id/button"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"/>
+</RelativeLayout>
+```
+## MAINACTIVITY.JAVA
+```
+package com.example.contentprovider;
+import android.database.Cursor;
+import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    private TextView textViewContacts;
+    int count=0;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        Button buttonLoadContacts = findViewById(R.id.button);
+        textViewContacts = findViewById(R.id.textView);
+
+        buttonLoadContacts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadContacts();
+            }
+        });
+    }
+
+    private void loadContacts() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        Cursor cursor = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                null, null, null, null);
+
+        if (cursor != null && cursor.getCount() > 0) {
+            int nameIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME_PRIMARY);
+            int phoneIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
+
+            while (cursor.moveToNext()) {
+                String name = nameIndex != -1 ? cursor.getString(nameIndex) : "No Name";
+                String phoneNumber = phoneIndex != -1 ? cursor.getString(phoneIndex) : "No Phone Number";
+
+                stringBuilder.append("Name: ").append(name).append("\n").append("Phone: ").append(phoneNumber).append("\n\n");
+                count = count+1;
+            }
+            cursor.close();
+            textViewContacts.setText(stringBuilder.toString());
+            Log.i("Content Provider Demo",stringBuilder.toString());
+        } else {
+            Toast.makeText(this, "No contacts found", Toast.LENGTH_SHORT).show();
+        }
+
+        System.out.println("Total Count of Contacts: "+count);
+    }
+
+}
+```
+## ANDROIDMANIFEST.XML
+```
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <uses-permission android:name="android.permission.WRITE_CONTACTS"/>
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Contentprovider"
+        tools:targetApi="31">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
 ```
 
 ## OUTPUT
 
+![image](https://github.com/SyedJaveed786/contentprovider/assets/106874713/65cf6987-10ec-4efe-b3d7-10d7a33d5b3f)
+![image](https://github.com/SyedJaveed786/contentprovider/assets/106874713/9e032f61-96c8-4f18-81bc-ca018b5ecfeb)
+![image](https://github.com/SyedJaveed786/contentprovider/assets/106874713/9869a57d-ac5f-4a00-bd69-2836f25d8c2c)
 
 
 
