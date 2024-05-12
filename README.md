@@ -1,4 +1,3 @@
-
 # Ex.No:5 Create Your Own Content Providers to get Contacts details.
 
 
@@ -30,7 +29,7 @@ Step 7: Save and run the application.
 ```
 /*
 Program to print the contact name and phone number using content providers.
-Developed by: SYED JAVEED H
+Developed by:SYED JAVEED H
 Registeration Number : 212221220055
 */
 ```
@@ -159,9 +158,11 @@ public class MainActivity extends AppCompatActivity {
 
 ## OUTPUT
 
-![image](https://github.com/SyedJaveed786/contentprovider/assets/106874713/65cf6987-10ec-4efe-b3d7-10d7a33d5b3f)
-![image](https://github.com/SyedJaveed786/contentprovider/assets/106874713/9e032f61-96c8-4f18-81bc-ca018b5ecfeb)
-![image](https://github.com/SyedJaveed786/contentprovider/assets/106874713/9869a57d-ac5f-4a00-bd69-2836f25d8c2c)
+![image](https://github.com/yuvaraj-csk/contentprovider/assets/134052574/90c03e96-4353-42dc-a7ed-ac1c73f8fff9)
+![listofcontact](https://github.com/yuvaraj-csk/contentprovider/assets/134052574/de21b66c-b501-47f8-8e0e-39df2ff66711)
+![getcontact](https://github.com/yuvaraj-csk/contentprovider/assets/134052574/b2333ebe-c90c-4f12-bc80-f0c65628c14a)
+
+
 
 
 
